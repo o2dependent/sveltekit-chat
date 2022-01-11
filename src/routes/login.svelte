@@ -1,0 +1,74 @@
+<script>
+	import { goto } from '$app/navigation';
+	import Button from '$lib/Button.svelte';
+	import Input from '$lib/Input.svelte';
+	import { login } from '$services/auth/login';
+
+	let email = '';
+	let password = '';
+	let isLoading = false;
+
+	const handleSubmit = async () => {
+		try {
+			isLoading = true;
+			await login({ email, password });
+			goto('/app/');
+		} catch (error) {
+			console.log(error);
+		}
+		isLoading = false;
+	};
+</script>
+
+<form
+	on:submit|preventDefault={handleSubmit}
+	class="container mx-auto p-4 pt-8 flex flex-col gap-4 justify-between h-full flex-grow"
+>
+	<div class="flex flex-col gap-2">
+		<div
+			class="py-8 px-12 mx-auto max-w-xl rounded-2xl border-2 border-slate-700 border-opacity-50 bg-slate-800 bg-opacity-50 backdrop-blur-lg flex items-center justify-center"
+		>
+			<svg
+				class="w-full max-w-sm"
+				viewBox="0 0 329 63"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					d="M1.91064 4.18054V61.0512H46.74V46.1623H21.1116H21.0302V4.18054H1.91064Z"
+					stroke="#777CD7"
+					stroke-width="2"
+					stroke-miterlimit="2"
+					stroke-linejoin="round"
+				/>
+				<path
+					d="M92.1941 38.9217C91.0551 41.1184 89.5093 42.7456 87.5566 43.8847C85.6853 45.0237 83.4886 45.5932 81.1292 45.5932C81.0478 45.5932 81.0478 45.5932 81.0478 45.5932C78.607 45.5932 76.4917 45.0237 74.539 43.8847C72.5864 42.7456 71.1219 41.0371 69.9829 38.9217C68.8438 36.8063 68.2743 34.2842 68.2743 31.3552C68.2743 28.5076 68.8438 25.9855 69.9829 23.8701C71.1219 21.7547 72.5864 20.0462 74.539 18.9071C76.4917 17.7681 78.607 17.1172 81.0478 17.1172C83.4073 17.1172 85.5226 17.7681 87.4753 18.9071H87.5566C87.5566 18.9885 87.5566 18.9885 87.5566 18.9885C88.1261 19.3139 88.6957 19.7207 89.1838 20.1275C90.4042 21.1852 91.3805 22.4056 92.1941 23.8701C93.3332 26.0668 93.9027 28.589 93.9027 31.4366C93.8213 34.2028 93.2518 36.725 92.1941 38.9217ZM90.5669 2.79785C87.5566 1.98425 84.3836 1.65881 81.0478 1.65881C75.0272 1.65881 69.4947 2.87921 64.5317 5.40137C59.6501 8.00489 55.8262 11.5847 53.06 16.0595C50.2938 20.6157 48.9106 25.7414 48.9106 31.4366C48.9106 32.3315 48.9106 33.1451 48.992 34.0401C49.3174 38.6776 50.7006 42.9083 53.06 46.7323C53.1414 46.895 53.2227 47.0577 53.3041 47.1391C55.989 51.4511 59.7315 54.8683 64.5317 57.3091C69.4133 59.9126 74.8645 61.133 81.0478 61.133C87.1498 61.133 92.6823 59.9126 97.5639 57.3091C102.446 54.7869 106.269 51.2884 109.036 46.7323C111.802 42.1761 113.185 37.0504 113.185 31.3552C113.185 25.66 111.802 20.6157 109.036 16.0595C106.269 11.5034 102.446 8.00489 97.5639 5.40137C95.2858 4.26233 93.0077 3.36737 90.5669 2.79785Z"
+					stroke="#7D82D3"
+					stroke-width="2"
+					stroke-miterlimit="2"
+					stroke-linejoin="round"
+				/>
+				<path
+					d="M182.179 36.8873L172.253 4.18054H154.598L144.102 36.5618V36.4805L134.176 4.18054H114.406L132.631 61.0512H153.215L162.897 30.6225V30.7853V30.7039L172.09 61.0512H192.674L210.818 4.18054H192.674L182.179 36.9686V36.8873Z"
+					stroke="#8388D0"
+					stroke-width="2"
+					stroke-miterlimit="2"
+					stroke-linejoin="round"
+				/>
+				<path
+					d="M250.721 29.2394V29.1581L273.42 4.18054H252.511L233.879 24.7646L233.798 24.846V4.18054H215.004V61.0512H233.798V46.9759L236.076 44.5351L238.192 42.1757L248.931 56.495L252.43 61.0512H274.641L259.671 41.1993L250.721 29.2394Z"
+					fill="#898ECC"
+				/>
+				<path
+					d="M266.011 4.18054L287.491 40.1417V40.223V61.0512H306.691V40.4671V40.3857L328.089 4.18054H309.62L297.905 23.8697L286.189 4.18054H266.011Z"
+					fill="#8E93C8"
+				/>
+			</svg>
+		</div>
+		<Input label="Email" name="email" bind:value={email} />
+		<Input label="Password" name="password" type="password" bind:value={password} />
+	</div>
+	<div class="max-w-xl flex flex-col gap-2">
+		<Button {isLoading} type="submit">Login</Button>
+	</div>
+</form>

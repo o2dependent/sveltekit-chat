@@ -22,6 +22,9 @@
 			<li class:active={$page.url.pathname === '/todos'}>
 				<a sveltekit:prefetch href="/todos">Todos</a>
 			</li>
+			<li class:active={$page.url.pathname === '/messages'}>
+				<a sveltekit:prefetch href="/messages">Messages</a>
+			</li>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
@@ -59,6 +62,7 @@
 	}
 
 	nav {
+		max-width: 100%;
 		display: flex;
 		justify-content: center;
 		--background: rgba(255, 255, 255, 0.7);
